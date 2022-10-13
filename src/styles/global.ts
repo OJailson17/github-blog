@@ -7,6 +7,16 @@ export const GlobalStyles = createGlobalStyle`
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  background-color: ${props => props.theme.colors['base-background']};
+}
+
+body, input, button, textarea {
+  font-family: 'Nunito', sans-serif;
+}
+
 button {
   cursor: pointer;
 }
