@@ -1,5 +1,5 @@
 import logoImg from '../../assets/logo.svg';
-import { HeaderContainer } from '../styles';
+import { HeaderContainer } from './styles';
 
 export const Header = () => {
 	return (
