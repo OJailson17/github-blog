@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
 import {
 	FaExternalLinkAlt,
 	FaGithub,
 	FaBuilding,
 	FaUserFriends,
 } from 'react-icons/fa';
+import { api } from '../../../../lib/axios';
 import {
 	UserCardContainer,
 	UserCardContent,
@@ -11,34 +13,44 @@ import {
 	UserCardProfilePicture,
 } from './styles';
 
+interface IGithubUser {
+	name: string;
+	bio: string;
+	avatar_url: string;
+	login: string;
+	followers: number;
+	html_url: string;
+}
+
 export const UserCard = () => {
+	const [githubUser, setGitHubUser] = useState({} as IGithubUser);
+
+	useEffect(() => {
+		api.get('/users/ojailson17').then(res => setGitHubUser(res.data));
+	}, []);
+
 	return (
 		<UserCardContainer>
 			{/* avatar */}
 			<UserCardProfilePicture>
-				<img src='https:github.com/ojailson17.png' alt='' />
+				<img src={githubUser.avatar_url} alt='' />
 			</UserCardProfilePicture>
 
 			<UserCardContent>
 				<div className='profile-header'>
-					<h2>Jailson de Oliveira</h2>
-					<a href='#'>
+					<h2>{githubUser.name}</h2>
+					<a href={githubUser.html_url} target='_blank'>
 						<span>GITHUB</span>
 						<FaExternalLinkAlt size={12} />
 					</a>
 				</div>
 
-				<p>
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum, earum
-					totam fuga distinctio alias ullam id dolores, perspiciatis, odit sint
-					repellendus. Reprehenderit aspernatur sunt dolores eius excepturi
-					molestias incidunt illum!
-				</p>
+				<p>{githubUser.bio}</p>
 
 				<UserCardProfileInfo>
 					<div>
 						<FaGithub />
-						<span>OJailson17</span>
+						<span>{githubUser.login}</span>
 					</div>
 					<div>
 						<FaBuilding />
@@ -46,7 +58,7 @@ export const UserCard = () => {
 					</div>
 					<div>
 						<FaUserFriends />
-						<span>6 seguidores</span>
+						<span>{githubUser.followers} seguidores</span>
 					</div>
 				</UserCardProfileInfo>
 			</UserCardContent>

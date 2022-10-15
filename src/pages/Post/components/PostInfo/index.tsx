@@ -17,10 +17,10 @@ export const PostInfo = () => {
 					VOLTAR
 				</Link>
 
-				<Link to='/'>
+				<a href='https://github.com/OJailson17' target='_blank'>
 					VER NO GITHUB
 					<FaExternalLinkAlt size={12} />
-				</Link>
+				</a>
 			</PostInfoHeader>
 
 			<h2>JavaScript data types and data structures</h2>
