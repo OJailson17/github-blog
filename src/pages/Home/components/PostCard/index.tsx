@@ -2,7 +2,7 @@ import { PostCardContainer } from './styles';
 
 export const PostCard = () => {
 	return (
-		<PostCardContainer href='#'>
+		<PostCardContainer to={'/post'}>
 			<div>
 				<h2>JavaScript data types and data structures</h2>
 				<span>Há 1 dia</span>
