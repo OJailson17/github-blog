@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
 * {
@@ -20,4 +20,16 @@ body, input, button, textarea {
 button {
   cursor: pointer;
 }
+`;
+
+export const PageContainer = styled.main`
+	width: 100%;
+
+	display: flex;
+	align-items: center;
+`;
+
+export const PageContent = styled.div`
+	width: 60%;
+	margin: 0 auto;
 `;
