@@ -17,7 +17,7 @@ interface IPost {
 export const Home = () => {
 	const [posts, setPosts] = useState<IPost[]>([]);
 
-	const searchIssue = async (search?: string) => {
+	const handleSearchIssue = async (search?: string) => {
 		const response = await api.get(
 			`/search/issues?q=${search || ''}repo:ojailson17/github-blog`,
 		);
@@ -25,11 +25,10 @@ export const Home = () => {
 		const issuesData = response.data;
 
 		setPosts(issuesData.items);
-		console.log(issuesData);
 	};
 
 	useEffect(() => {
-		searchIssue();
+		handleSearchIssue();
 	}, []);
 
 	return (
@@ -37,7 +36,10 @@ export const Home = () => {
 			<PageContainer>
 				<PageContent>
 					<UserCard />
-					<SearchBar publicationsAmount={posts.length} />
+					<SearchBar
+						publicationsAmount={posts.length}
+						searchIssue={handleSearchIssue}
+					/>
 
 					<PostGridContainer>
 						{posts.map(post => (
