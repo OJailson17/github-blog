@@ -1,3 +1,7 @@
+import ReactMarkdown from 'react-markdown';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { api } from '../../lib/axios';
 import { PageContainer, PageContent } from '../../styles/global';
 import { Code } from './components/Code';
 import { PostInfo } from './components/PostInfo';
@@ -9,34 +13,46 @@ foo = 'bar';    // foo is now a string
 foo = true;     // foo is now a boolean
 `;
 
+interface IPost {
+	id: number;
+	title: string;
+	body: string;
+	created_at: Date;
+	number: number;
+	user: {
+		login: string;
+	};
+	comments: number;
+	html_url: string;
+}
+
 export const Post = () => {
+	const [post, setPost] = useState({} as IPost);
+
+	const { issue } = useParams();
+
+	const getPost = async () => {
+		const response = await api.get(
+			`/repos/ojailson17/github-blog/issues/${issue || '1'}`,
+		);
+		const postData = await response.data;
+		setPost(postData);
+	};
+
+	useEffect(() => {
+		getPost();
+	}, []);
+
 	return (
 		<PageContainer>
 			<PageContent>
-				<PostInfo />
+				<PostInfo postInfo={post} />
 
 				<PostContent>
-					<p>
-						Programming languages all have built-in data structures, but these
-						often differ from one language to another. This article attempts to
-						list the built-in data structures available in JavaScript and what
-						properties they have. These can be used to build other data
-						structures. Wherever possible, comparisons with other languages are
-						drawn.
-					</p>
-
-					<a href='#' className='title'>
-						Dynamic Typing
-					</a>
-					<p>
-						JavaScript is a loosely typed and dynamic language. Variables in
-						JavaScript are not directly associated with any particular value
-						type, and any variable can be assigned (and re-assigned) values of
-						all types:
-					</p>
+					<ReactMarkdown>{post.body}</ReactMarkdown>
 
 					{/* code */}
-					<Code code={codeString} language='javascript' />
+					{/* <Code code={codeString} language='javascript' /> */}
 				</PostContent>
 			</PageContent>
 		</PageContainer>

@@ -32,7 +32,7 @@ export const PostCardContainer = styled(Link)`
 		}
 	}
 
-	p {
+	& .post-body {
 		margin-top: 1.25rem;
 		overflow: hidden;
 		display: -webkit-box;

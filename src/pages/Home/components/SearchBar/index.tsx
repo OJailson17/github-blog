@@ -1,11 +1,15 @@
 import { SearchBarContainer, SearchBarForm } from './styles';
 
-export const SearchBar = () => {
+interface SearchBarProps {
+	publicationsAmount: number;
+}
+
+export const SearchBar = ({ publicationsAmount }: SearchBarProps) => {
 	return (
 		<SearchBarContainer>
 			<div>
 				<p>Publicações</p>
-				<span>6 publicações</span>
+				<span>{publicationsAmount} publicações</span>
 			</div>
 
 			<SearchBarForm>

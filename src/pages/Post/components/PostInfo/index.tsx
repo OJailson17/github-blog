@@ -8,7 +8,21 @@ import {
 import { Link } from 'react-router-dom';
 import { PostInfoCard, PostInfoContainer, PostInfoHeader } from './styles';
 
-export const PostInfo = () => {
+interface PostInfo {
+	title: string;
+	created_at: Date;
+	user: {
+		login: string;
+	};
+	comments: number;
+	html_url: string;
+}
+
+interface PostInfoProps {
+	postInfo: PostInfo;
+}
+
+export const PostInfo = ({ postInfo }: PostInfoProps) => {
 	return (
 		<PostInfoContainer>
 			<PostInfoHeader>
@@ -17,18 +31,18 @@ export const PostInfo = () => {
 					VOLTAR
 				</Link>
 
-				<a href='https://github.com/OJailson17' target='_blank'>
+				<a href={postInfo.html_url} target='_blank'>
 					VER NO GITHUB
 					<FaExternalLinkAlt size={12} />
 				</a>
 			</PostInfoHeader>
 
-			<h2>JavaScript data types and data structures</h2>
+			<h2>{postInfo.title}</h2>
 
 			<PostInfoCard>
 				<div>
 					<FaGithub />
-					<span>OJailson17</span>
+					<span>{postInfo.user?.login}</span>
 				</div>
 				<div>
 					<FaCalendarDay />
@@ -36,7 +50,7 @@ export const PostInfo = () => {
 				</div>
 				<div>
 					<FaComment />
-					<span>5 Comentários</span>
+					<span>{postInfo.comments} Comentários</span>
 				</div>
 			</PostInfoCard>
 		</PostInfoContainer>

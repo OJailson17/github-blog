@@ -28,4 +28,13 @@ export const PostContent = styled.main`
 			text-decoration: underline;
 		}
 	}
+
+	img {
+		width: 100%;
+	}
+
+	h2,
+	h3 {
+		margin-top: 2rem;
+	}
 `;
