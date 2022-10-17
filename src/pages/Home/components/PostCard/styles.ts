@@ -30,6 +30,10 @@ export const PostCardContainer = styled(Link)`
 			font-size: ${props => props.theme.fontSizes.sm};
 			line-height: 160%;
 		}
+
+		a {
+			color: ${props => props.theme.colors.blue};
+		}
 	}
 
 	& .post-body {

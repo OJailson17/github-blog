@@ -1,3 +1,5 @@
+import { formatDistanceToNow } from 'date-fns';
+import ptBr from 'date-fns/locale/pt-BR';
 import {
 	FaCalendarDay,
 	FaChevronLeft,
@@ -23,6 +25,15 @@ interface PostInfoProps {
 }
 
 export const PostInfo = ({ postInfo }: PostInfoProps) => {
+	let postDate: Date | string = 'Há 1 dia';
+
+	if (postInfo.created_at) {
+		postDate = formatDistanceToNow(new Date(postInfo.created_at), {
+			addSuffix: true,
+			locale: ptBr,
+		});
+	}
+
 	return (
 		<PostInfoContainer>
 			<PostInfoHeader>
@@ -46,7 +57,7 @@ export const PostInfo = ({ postInfo }: PostInfoProps) => {
 				</div>
 				<div>
 					<FaCalendarDay />
-					<span>Há 1 dia</span>
+					<span>{String(postDate)}</span>
 				</div>
 				<div>
 					<FaComment />
